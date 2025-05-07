@@ -2,79 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chira Tech</title>
+  <title>Chira Tech - Redirect</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: 
-        linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95)),
-        url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
       color: #f9f6f2;
-      height: 100vh;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #d4af37;
+      width: 320px;
       text-align: center;
-      padding: 20px;
     }
-    .welcome-message {
-      max-width: 800px;
-      margin-bottom: 30px;
-      font-size: 1.1rem;
-      color: #e8ddbe;
-    }
-    .signin-box {
-      background-color: #121212cc;
-      border: 2px solid #d4af37;
-      border-radius: 15px;
-      padding: 40px 30px;
-      box-shadow: 0 0 20px #d4af37aa;
-      max-width: 400px;
-      width: 100%;
-    }
-    h1 {
-      color: #d4af37;
-      margin-bottom: 20px;
-    }
+
     button {
       width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #d4af37, #f9d71c);
+      padding: 12px;
+      margin-top: 20px;
+      border-radius: 6px;
       border: none;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #d4af37, #f9d71c);
       color: #111;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 12px #d4af3744;
-      transition: background 0.3s ease, transform 0.2s ease;
     }
+
     button:hover {
       background: linear-gradient(135deg, #f9d71c, #d4af37);
-      transform: scale(1.05);
-    }
-    button:active {
-      transform: scale(0.97);
     }
   </style>
 </head>
 <body>
-<h1>CHIRA TECH </h1>
-  <div class="welcome-message">
-    <h2>
-      We’re thrilled to have you join our growing tech family. At Chira Tech, we’re driven by a passion for cutting-edge technology, smart solutions, and creative problem-solving. Whether you're here to explore, collaborate, or build something amazing, you're in the right place.
-    </h2>
+
+  <div class="container">
+    <div class="login-box">
+      <h2>Welcome to Chira Tech</h2>
+      <p>Click below to continue to your dashboard.</p>
+      <button onclick="redirectToDashboard()">Sign In</button>
+    </div>
   </div>
 
-  <div class="signin-box">
-    <h1>Welcome to Chira Tech</h1>
-    <button onclick="location.href='"D:\ChiraTech\Index2.html"'">Sign In</button>
-  </div>
+  <script>
+    function redirectToDashboard() {
+      window.location.href = "https://chiratech.github.io/chiratech/Index2.html";
+    }
+  </script>
 
 </body>
 </html>
