@@ -2,43 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chira Tech - Redirect</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <title>Chira Tech - Login</title>
+  <script type="module">
+    // Firebase SDK import
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxFr6VLzJ_ooLC9It8cAUUu6axXt9mtsw",
+      authDomain: "chiratech-630ad.firebaseapp.com",
+      projectId: "chiratech-630ad",
+      storageBucket: "chiratech-630ad.firebasestorage.app",
+      messagingSenderId: "290779661649",
+      appId: "1:290779661649:web:8d19ea8c9a4a347a503f70",
+      measurementId: "G-J966HB0VRS"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Auth listener
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.getElementById('auth-section').style.display = 'none';
+        document.getElementById('dashboard-section').style.display = 'block';
+      } else {
+        document.getElementById('auth-section').style.display = 'block';
+        document.getElementById('dashboard-section').style.display = 'none';
+      }
+    });
+
+    // Signup
+    window.handleSignup = () => {
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => alert("Account created! You can now sign in."))
+        .catch(err => alert(err.message));
+    };
+
+    // Signin
+    window.handleLogin = () => {
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      signInWithEmailAndPassword(auth, email, password)
+        .catch(err => alert(err.message));
+    };
+
+    // Logout
+    window.handleLogout = () => {
+      signOut(auth);
+    };
+  </script>
+
+  <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background-color: #111;
       color: #f9f6f2;
-    }
-
-    .container {
+      margin: 0;
+      padding: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      flex-direction: column;
     }
 
-    .login-box {
+    .box {
       background: #222;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 10px #d4af37;
-      width: 320px;
+      width: 300px;
       text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    input {
+      background: #333;
+      color: white;
+      border: 1px solid #d4af37;
     }
 
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
       background: linear-gradient(135deg, #d4af37, #f9d71c);
       color: #111;
       font-weight: bold;
@@ -48,23 +106,45 @@
     button:hover {
       background: linear-gradient(135deg, #f9d71c, #d4af37);
     }
+
+    iframe {
+      width: 90vw;
+      height: 70vh;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .logout-btn {
+      background: #ff5252;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="login-box">
-      <h2>Welcome to Chira Tech</h2>
-      <p>Click below to continue to your dashboard.</p>
-      <button onclick="redirectToDashboard()">Sign In</button>
+  <!-- Auth Section -->
+  <div id="auth-section">
+    <div class="box">
+      <h2>Sign Up</h2>
+      <input type="email" id="signup-email" placeholder="Email" />
+      <input type="password" id="signup-password" placeholder="Password" />
+      <button onclick="handleSignup()">Create Account</button>
+    </div>
+
+    <div class="box">
+      <h2>Sign In</h2>
+      <input type="email" id="login-email" placeholder="Email" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button onclick="handleLogin()">Log In</button>
     </div>
   </div>
 
-  <script>
-    function redirectToDashboard() {
-      window.location.href = "https://<your-username>.github.io/chiratech/Index2.html";
-    }
-  </script>
+  <!-- Dashboard Section -->
+  <div id="dashboard-section" style="display:none;">
+    <button class="logout-btn" onclick="handleLogout()">Log Out</button>
+    <h2>Welcome to Chira Tech</h2>
+    <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=chiratech"></iframe>
+  </div>
 
 </body>
 </html>
