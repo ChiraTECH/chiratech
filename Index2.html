@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sign In / Sign Up</title>
+  <title>Chira Tech - Redirect</title>
   <style>
     * {
       box-sizing: border-box;
@@ -23,11 +23,7 @@
       height: 100vh;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    .login-box, .signup-box, .dashboard-box {
+    .login-box {
       background: #222;
       padding: 30px;
       border-radius: 10px;
@@ -36,176 +32,37 @@
       text-align: center;
     }
 
-    input, button {
+    button {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
+      margin-top: 20px;
       border-radius: 6px;
       border: none;
       font-size: 1rem;
-    }
-
-    input {
-      background: #333;
-      color: #fff;
-      border: 1px solid #d4af37;
-    }
-
-    button {
       background: linear-gradient(135deg, #d4af37, #f9d71c);
       color: #111;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .error {
-      color: red;
-      display: none;
-      font-size: 0.9rem;
-    }
-
-    nav {
-      background-color: #222;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-
-    nav .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: #f9d71c;
-    }
-
-    nav .nav-links a {
-      color: #d4af37;
-      text-decoration: none;
-      margin-left: 15px;
-      font-weight: bold;
-    }
-
-    .dashboard-content {
-      padding: 20px;
-    }
-
-    ul {
-      margin-top: 15px;
-      padding-left: 20px;
-    }
-
-    ul li {
-      margin-bottom: 10px;
+    button:hover {
+      background: linear-gradient(135deg, #f9d71c, #d4af37);
     }
   </style>
 </head>
 <body>
 
-  <!-- Sign Up Section -->
-  <div class="container" id="signup-section">
-    <div class="signup-box">
-      <h2>Create Account</h2>
-      <input type="text" id="signup-username" placeholder="Username" />
-      <input type="password" id="signup-password" placeholder="Password" />
-      <input type="password" id="confirm-password" placeholder="Confirm Password" />
-      <div class="error" id="signup-error">Passwords do not match.</div>
-      <button onclick="handleSignUp()">Create Account</button>
-      <p>Already have an account? <a href="javascript:void(0)" onclick="showLogin()">Sign In</a></p>
-    </div>
-  </div>
-
-  <!-- Login Section -->
-  <div class="container hidden" id="login-section">
+  <div class="container">
     <div class="login-box">
-      <h2>Sign In</h2>
-      <input type="text" id="login-username" placeholder="Username" />
-      <input type="password" id="login-password" placeholder="Password" />
-      <div class="error" id="login-error">Incorrect username or password.</div>
-      <button onclick="handleLogin()">Sign In</button>
-      <p>Don't have an account? <a href="javascript:void(0)" onclick="showSignUp()">Create Account</a></p>
-    </div>
-  </div>
-
-  <!-- Dashboard Section -->
-  <div class="hidden" id="dashboard-section">
-    <nav>
-      <div class="logo">Chira Tech</div>
-      <div class="nav-links">
-        <a href="file:///C:/Users/inoka/OneDrive/Desktop/hl.html">Home</a>
-        <a href="#">Videos</a>
-        <a href="#">About Me</a>
-        <a href="#" onclick="handleLogout()">Logout</a>
-      </div>
-    </nav>
-
-    <div class="dashboard-content">
-      <h2>Welcome, Admin!</h2>
-      <p>You have successfully signed in.</p>
-      <ul>
-        <li>📢 New video coming this Friday: <strong>"AI vs Human Coding: Who Wins?"</strong></li>
-        <li>⚙️ Dashboard redesign in progress – sneak peek inside!</li>
-        <li>💬 Join our community Discord to collaborate.</li>
-      </ul>
+      <h2>Welcome to Chira Tech</h2>
+      <p>Click below to continue to your dashboard.</p>
+      <button onclick="redirectToDashboard()">Sign In</button>
     </div>
   </div>
 
   <script>
-    // Show the login section
-    function showLogin() {
-      document.getElementById('signup-section').classList.add('hidden');
-      document.getElementById('login-section').classList.remove('hidden');
-      document.getElementById('signup-error').style.display = "none";
-    }
-
-    // Show the sign-up section
-    function showSignUp() {
-      document.getElementById('login-section').classList.add('hidden');
-      document.getElementById('signup-section').classList.remove('hidden');
-      document.getElementById('login-error').style.display = "none";
-    }
-
-    // Handle Sign Up
-    function handleSignUp() {
-      const username = document.getElementById('signup-username').value.trim();
-      const password = document.getElementById('signup-password').value.trim();
-      const confirmPassword = document.getElementById('confirm-password').value.trim();
-      const signupError = document.getElementById('signup-error');
-
-      if (password !== confirmPassword) {
-        signupError.style.display = "block";
-        return;
-      }
-
-      const userData = { username, password };
-      localStorage.setItem(username, JSON.stringify(userData));
-
-      alert("Account created successfully. You can now sign in.");
-      showLogin();
-    }
-
-    // Handle Login
-    function handleLogin() {
-      const username = document.getElementById('login-username').value.trim();
-      const password = document.getElementById('login-password').value.trim();
-      const loginError = document.getElementById('login-error');
-
-      const storedData = JSON.parse(localStorage.getItem(username));
-
-      if (storedData && storedData.password === password) {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('dashboard-section').classList.remove('hidden');
-        loginError.style.display = "none";
-      } else {
-        loginError.style.display = "block";
-      }
-    }
-
-    // Handle Logout
-    function handleLogout() {
-      document.getElementById('dashboard-section').classList.add('hidden');
-      document.getElementById('login-section').classList.remove('hidden');
-      document.getElementById('login-username').value = '';
-      document.getElementById('login-password').value = '';
+    function redirectToDashboard() {
+      window.location.href = "https://<your-username>.github.io/chiratech/Index2.html";
     }
   </script>
 
